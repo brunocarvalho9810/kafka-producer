@@ -28,7 +28,7 @@ public class TestController {
     public ResponseEntity<?> send(){
         IntStream.range(1, 50)
                 .boxed()
-                .forEach(numero -> kafkaTemplate.send("topic-1", "Numeor: " + numero));
+                .forEach(numero -> kafkaTemplate.send("topic-1", "Numero: " + numero));
         return ResponseEntity.ok().build();
     }
 }
