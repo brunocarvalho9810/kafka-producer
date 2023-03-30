@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.util.stream.IntStream;
 
 /**
  * Classe responsável por receber solicitações API REST
@@ -25,7 +26,9 @@ public class TestController {
      */
     @GetMapping("send")
     public ResponseEntity<?> send(){
-        kafkaTemplate.send("topic-1", "Envio de : " + LocalDateTime.now());
+        IntStream.range(1, 50)
+                .boxed()
+                .forEach(numero -> kafkaTemplate.send("topic-1", "Numeor: " + numero));
         return ResponseEntity.ok().build();
     }
 }
